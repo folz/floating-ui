@@ -1,6 +1,6 @@
 import {
+  type Options as DetectOverflowOptions,
   detectOverflow,
-  Options as DetectOverflowOptions,
 } from '../detectOverflow';
 import type {Derivable, Middleware, MiddlewareState} from '../types';
 import {evaluate} from '../utils/evaluate';

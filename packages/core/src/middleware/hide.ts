@@ -1,6 +1,6 @@
 import {
+  type Options as DetectOverflowOptions,
   detectOverflow,
-  Options as DetectOverflowOptions,
 } from '../detectOverflow';
 import {sides} from '../enums';
 import type {Derivable, Middleware, Rect, SideObject} from '../types';

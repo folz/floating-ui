@@ -1,6 +1,6 @@
 import {
+  type Options as DetectOverflowOptions,
   detectOverflow,
-  Options as DetectOverflowOptions,
 } from '../detectOverflow';
 import {allPlacements} from '../enums';
 import type {Alignment, Derivable, Middleware, Placement} from '../types';

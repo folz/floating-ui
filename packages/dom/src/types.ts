@@ -259,7 +259,7 @@ export {
   size,
 };
 export {computePosition} from './';
-export {autoUpdate, AutoUpdateOptions} from './autoUpdate';
+export {type AutoUpdateOptions, autoUpdate} from './autoUpdate';
 export {platform} from './platform';
 export {getOverflowAncestors} from './utils/getOverflowAncestors';
 export type {
