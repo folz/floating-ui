@@ -1,6 +1,6 @@
 import {
+  type Options as DetectOverflowOptions,
   detectOverflow,
-  Options as DetectOverflowOptions,
 } from '../detectOverflow';
 import {sides} from '../enums';
 import type {Derivable, Middleware, Rect, SideObject} from '../types';
@@ -38,7 +38,7 @@ export const hide = (
 ): Middleware => ({
   name: 'hide',
   options,
-  async fn(state) {
+  fn(state) {
     const {rects} = state;
 
     const {strategy = 'referenceHidden', ...detectOverflowOptions} = evaluate(
@@ -48,7 +48,7 @@ export const hide = (
 
     switch (strategy) {
       case 'referenceHidden': {
-        const overflow = await detectOverflow(state, {
+        const overflow = detectOverflow(state, {
           ...detectOverflowOptions,
           elementContext: 'reference',
         });
@@ -61,7 +61,7 @@ export const hide = (
         };
       }
       case 'escaped': {
-        const overflow = await detectOverflow(state, {
+        const overflow = detectOverflow(state, {
           ...detectOverflowOptions,
           altBoundary: true,
         });

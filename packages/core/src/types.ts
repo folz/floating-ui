@@ -6,8 +6,6 @@ export type Strategy = 'absolute' | 'fixed';
 export type Axis = 'x' | 'y';
 export type Length = 'width' | 'height';
 
-type Promisable<T> = T | Promise<T>;
-
 /**
  * Function option to derive middleware options from state.
  */
@@ -23,27 +21,27 @@ export interface Platform {
     reference: ReferenceElement;
     floating: FloatingElement;
     strategy: Strategy;
-  }) => Promisable<ElementRects>;
+  }) => ElementRects;
   getClippingRect: (args: {
     element: any;
     boundary: Boundary;
     rootBoundary: RootBoundary;
     strategy: Strategy;
-  }) => Promisable<Rect>;
-  getDimensions: (element: any) => Promisable<Dimensions>;
+  }) => Rect;
+  getDimensions: (element: any) => Dimensions;
 
   // Optional
   convertOffsetParentRelativeRectToViewportRelativeRect?: (args: {
     rect: Rect;
     offsetParent: any;
     strategy: Strategy;
-  }) => Promisable<Rect>;
-  getOffsetParent?: (element: any) => Promisable<any>;
-  isElement?: (value: any) => Promisable<boolean>;
-  getDocumentElement?: (element: any) => Promisable<any>;
-  getClientRects?: (element: any) => Promisable<Array<ClientRectObject>>;
-  isRTL?: (element: any) => Promisable<boolean>;
-  getScale?: (element: any) => Promisable<{x: number; y: number}>;
+  }) => Rect;
+  getOffsetParent?: (element: any) => any;
+  isElement?: (value: any) => boolean;
+  getDocumentElement?: (element: any) => any;
+  getClientRects?: (element: any) => Array<ClientRectObject>;
+  isRTL?: (element: any) => boolean;
+  getScale?: (element: any) => {x: number; y: number};
 }
 
 export type Coords = {[key in Axis]: number};
@@ -118,7 +116,7 @@ export type ComputePosition = (
   reference: unknown,
   floating: unknown,
   config: ComputePositionConfig
-) => Promise<ComputePositionReturn>;
+) => ComputePositionReturn;
 
 export interface MiddlewareReturn extends Partial<Coords> {
   data?: {
@@ -135,7 +133,7 @@ export interface MiddlewareReturn extends Partial<Coords> {
 export type Middleware = {
   name: string;
   options?: any;
-  fn: (state: MiddlewareState) => Promisable<MiddlewareReturn>;
+  fn: (state: MiddlewareState) => MiddlewareReturn;
 };
 
 export type Dimensions = {[key in Length]: number};
@@ -185,20 +183,23 @@ export type ElementContext = 'reference' | 'floating';
 
 export {computePosition} from './computePosition';
 export {
+  type Options as DetectOverflowOptions,
   detectOverflow,
-  Options as DetectOverflowOptions,
 } from './detectOverflow';
-export {arrow, ArrowOptions} from './middleware/arrow';
-export {autoPlacement, AutoPlacementOptions} from './middleware/autoPlacement';
-export {flip, FlipOptions} from './middleware/flip';
-export {hide, HideOptions} from './middleware/hide';
-export {inline, InlineOptions} from './middleware/inline';
-export {offset, OffsetOptions} from './middleware/offset';
+export {type ArrowOptions, arrow} from './middleware/arrow';
 export {
+  type AutoPlacementOptions,
+  autoPlacement,
+} from './middleware/autoPlacement';
+export {type FlipOptions, flip} from './middleware/flip';
+export {type HideOptions, hide} from './middleware/hide';
+export {type InlineOptions, inline} from './middleware/inline';
+export {type OffsetOptions, offset} from './middleware/offset';
+export {
+  type LimitShiftOptions,
+  type ShiftOptions,
   limitShift,
-  LimitShiftOptions,
   shift,
-  ShiftOptions,
 } from './middleware/shift';
-export {size, SizeOptions} from './middleware/size';
+export {type SizeOptions, size} from './middleware/size';
 export {rectToClientRect} from './utils/rectToClientRect';
